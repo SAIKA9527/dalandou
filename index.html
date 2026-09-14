@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>海克斯乱斗 · 对局控制台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .player-vote{display:flex;flex-wrap:wrap;gap:7px;margin-left:auto}.player-vote .vote-btn{min-width:112px}.toast{position:fixed;z-index:30;bottom:28px;left:50%;transform:translateX(-50%);padding:13px 18px;background:#e8f7b9;color:#15180e;box-shadow:0 14px 35px rgba(0,0,0,.35);font-size:12px;font-weight:700}
+      :root{--ink:#f4f0dd;--muted:#99a9b4;--bg:#07121d;--panel:#0e2130;--line:rgba(104,208,238,.2);--red:#fb875f;--blue:#46d5f0;--lime:#e8c86b}body{background:radial-gradient(ellipse at 50% -20%,#1d5570 0%,#0a1928 35%,#050b14 78%)}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:linear-gradient(30deg,transparent 48%,#62ddff 49%,transparent 51%),linear-gradient(150deg,transparent 48%,#62ddff 49%,transparent 51%);background-size:92px 160px;mask-image:linear-gradient(to bottom,black,transparent 75%)}.ambient-one{background:#16c9f3;opacity:.18}.ambient-two{background:#ef7d54;opacity:.15}.brand{font-family:Georgia,"Noto Sans SC",serif;letter-spacing:.2px;font-size:20px}.brand-mark{background:linear-gradient(135deg,#d9f8ff,#50cce9);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);color:#0b3548}.round-pill{background:#0b1c2b;border-color:#397a95;color:#bfd8df}.live-dot{background:#55dff4;box-shadow:0 0 12px #55dff4}.ghost-button{color:#d6b969}.ghost-button span{color:#6edff1}.eyebrow{color:#e8c86b}.hero h1{font-family:Georgia,"Noto Sans SC",serif;text-shadow:0 0 42px rgba(74,212,244,.17)}.hero h1 em{-webkit-text-stroke:1px #69d8ed}.input-row{background:#0b1c2b;border-color:#376c84;box-shadow:inset 0 0 24px rgba(41,176,214,.08)}.input-row:focus-within{border-color:#e8c86b}.input-row button,.primary-btn{background:linear-gradient(135deg,#f0d77e,#b88c35);color:#122231}.team-card{background:linear-gradient(145deg,rgba(16,49,67,.92),rgba(7,19,31,.92));border-color:#286078;clip-path:polygon(0 14px,14px 0,calc(100% - 14px) 0,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0 calc(100% - 14px))}.team-card h3{font-family:Georgia,"Noto Sans SC",serif}.ember{border-color:#bd6a51}.tide{border-color:#38aeca}.ember .team-symbol{color:#ff9e72}.tide .team-symbol{color:#55dbf4}.ember .slot.filled{background:linear-gradient(135deg,#ffad78,#dd684e)}.tide .slot.filled{background:linear-gradient(135deg,#77e6fa,#2aa0c7)}.team-action{border-color:#4b8194;background:rgba(4,12,20,.35)}.ember .team-action:hover{background:#db7656}.tide .team-action:hover{background:#3eb7d3}.status-card,.secret-card{background:linear-gradient(145deg,#102839,#0a1724);border-color:#2a6077}.secret-card.active{border-color:#c9a64c;background:linear-gradient(135deg,#282512,#111c23)}.notification-box{background:#091927;border-color:#285f77}.user-chip{color:#f4d878;background:#12293a;border-color:#397d94}.admin-modal{background:linear-gradient(145deg,#102839,#08141f);border-color:#3b7890}.vote-team{background:#091926;border-color:#2b5d74}.secondary-btn{background:#1c4256}.identity-tag{background:#1c4054}.identity-tag.impostor{background:#673d30;color:#ffd3a9}
+      body{background:linear-gradient(90deg,rgba(3,11,20,.94) 0%,rgba(4,15,26,.73) 48%,rgba(3,10,19,.4) 100%),url('hextech-poro-bg.png') center/cover fixed no-repeat}body:before{opacity:.12}.shell{z-index:1}.team-card:after{pointer-events:none}.team-action{position:relative;z-index:2}.admin-player{display:flex;align-items:center;gap:8px}.kick-btn{border:1px solid rgba(251,135,95,.5);background:transparent;color:#ffb192;font:700 10px inherit;padding:7px 9px;cursor:pointer}.kick-btn:hover{background:#6a382e;color:#fff}.admin-panel .identity-list{align-items:center}
+      .staging-zone{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;align-items:center;gap:18px;padding:22px 27px;background:linear-gradient(90deg,rgba(86,72,28,.94),rgba(47,39,17,.9));border-color:#d1b45e}.staging-zone:after{background:#fff1a6;opacity:.16}.staging-zone h3{margin:4px 0;font-size:24px;color:#fff0af}.staging-zone>p{margin:0;color:var(--muted);font-size:12px}.staging-zone .slots{margin:14px 0 0}.staging-zone .team-action{width:170px;border-color:#d1b45e;color:#ffedaa}.staging-zone .slot{border-color:#c8ac58}@media(max-width:650px){.staging-zone{grid-template-columns:1fr}.staging-zone .team-action{width:100%}}
+    </style>
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="#"><span class="brand-mark">◇</span><span>海克斯乱斗</span></a>
+        <div class="round-pill"><span class="live-dot"></span><span id="roundLabel">等待组队</span><span class="divider"></span><span id="roundCounter">ROUND 00</span></div>
+        <button class="ghost-button" id="adminEntry">管理员控制台 <span>↗</span></button>
+      </header>
+
+      <section class="hero" id="welcomeView">
+        <p class="eyebrow">HEXTECH BRAWL · HOWLING ABYSS · OPEN LOBBY</p>
+        <h1>集结峡谷，<em>火力全开。</em></h1>
+        <p class="lede">输入你的召唤师代号，选择所属队伍。所有席位就绪后，等待管理员开启本局海克斯乱斗。</p>
+        <form class="identity-form" id="identityForm">
+          <label for="playerId">召唤师代号</label>
+          <div class="input-row"><input id="playerId" maxlength="16" placeholder="例如：NOVA-07" autocomplete="off" /><button type="submit">进入备战蛆 <span>→</span></button></div>
+          <small>每位玩家只占用一个席位 · 可随时切换阵营</small>
+        </form>
+        <div class="hero-stat"><span>当前在线</span><strong id="onlineCount">00</strong><span>位召唤师</span></div>
+      </section>
+
+      <section class="lobby hidden" id="lobbyView">
+        <div class="section-heading"><div><p class="eyebrow">TEAM ASSIGNMENT</p><h2>选择你的队伍</h2></div><p id="playerGreeting"></p></div>
+        <div class="teams-grid">
+          <article class="team-card ember" data-team="ember"><div class="team-top"><span class="team-symbol">✦</span><span class="team-code">BLUE SIDE · 912</span></div><h3>912</h3><p>我市区</p><div class="slots" id="emberSlots"></div><button class="team-action" data-join="ember">加入 912 <span>→</span></button></article>
+          <article class="team-card tide" data-team="tide"><div class="team-top"><span class="team-symbol">◒</span><span class="team-code">RED SIDE · 414</span></div><h3>414</h3><p>我是奶龙</p><div class="slots" id="tideSlots"></div><button class="team-action" data-join="tide">加入 414 <span>→</span></button></article>
+          <article class="team-card staging-zone" data-team="staging"><div><div class="team-top"><span class="team-symbol">◇</span><span class="team-code">STAGING AREA</span></div><h3>备战蛆</h3><div class="slots" id="stagingSlots"></div></div><button class="team-action" data-join="staging">加入备战蛆 <span>→</span></button></article>
+        </div>
+        <div class="lobby-footer"><div class="progress-line"><span id="progressFill"></span></div><span id="capacityText">912 0/5 · 414 0/5 · 备战蛆 0</span></div>
+      </section>
+
+      <section class="mission hidden" id="missionView">
+        <div class="mission-head"><div><p class="eyebrow">HOWLING ABYSS · MATCH ROOM</p><h2 id="missionTitle">对局进行中</h2></div><div class="user-chip" id="userChip"></div></div>
+        <div class="mission-grid"><article class="status-card"><span class="status-icon">◎</span><p>当前状态</p><h3 id="missionState">等待指挥官安排</h3><small id="missionHint">所有人已到位，请耐心等待。</small></article><article class="secret-card" id="secretCard"><span class="secret-icon">◈</span><p>私密情报</p><h3 id="secretTitle">情报尚未送达</h3><small id="secretText">指挥官分配完成后，只有相关玩家会收到身份通知。</small></article></div>
+        <div class="notification-box" id="notificationBox"><span>✦</span><p>任务记录将由指挥官推进。请保持本页面开启。</p></div>
+      </section>
+    </main>
+
+    <div class="modal-backdrop hidden" id="adminModal"><section class="admin-modal"><button class="close" id="closeAdmin">×</button><div class="admin-head"><p class="eyebrow">COMMAND CENTER</p><h2>指挥官控制台</h2><p>掌控身份分配、投票与结果公布。</p></div><div id="adminContent"></div></section></div>
+    <div class="toast hidden" id="toast"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
